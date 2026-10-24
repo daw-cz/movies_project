@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="row">
+   <div class="col-lg-12 text-center">
+       <h1 class="mt-5">Witaj w mojej bibliotece filmów</h1>
+       <p class="lead">Znajdziesz tutaj tylko najlepsze tytuły!</p>
+</div>
+<div class="col-lg-12 mb-4 text-center">
+    {% for type in list_types %}
+        <a href="{{ url_for('homepage', list_type=type) }}" 
+           class="btn {% if selected_list == type %}btn-info{% else %}btn-outline-info{% endif %} mx-1">
+           <!-- Użycie filtrów do ładnego sformatowania tekstu przycisku -->
+           {{ type|replace('_', ' ')|capitalize }}
+        </a>
+    {% endfor %}
+</div>
+
+   {% for movie in movies %}
+   <div class="col-lg-3 col-md-6 mb-4">
+       <div class="card h-100">
+           <img class="card-img-top" src="{{ tmdb_image_url(movie.poster_path, "w780") }}" alt="">
+           <div class="card-body">
+               <h4 class="card-title text-center">{{ movie.title }}</h4>
+           </div>
+           <div class="card-footer text-center">
+               <a href="{{ url_for('movie_details', movie_id=movie.id) }}" class="btn btn-primary">Pokaż więcej</a>
+           </div>
+       </div>
+   </div>
+   {% endfor %}
+</div>
+
+{% endblock %}
