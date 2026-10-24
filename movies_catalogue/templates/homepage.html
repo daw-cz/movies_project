@@ -11,7 +11,6 @@
     {% for type in list_types %}
         <a href="{{ url_for('homepage', list_type=type) }}" 
            class="btn {% if selected_list == type %}btn-info{% else %}btn-outline-info{% endif %} mx-1">
-           <!-- Użycie filtrów do ładnego sformatowania tekstu przycisku -->
            {{ type|replace('_', ' ')|capitalize }}
         </a>
     {% endfor %}
